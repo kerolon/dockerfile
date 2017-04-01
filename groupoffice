@@ -1,6 +1,6 @@
 FROM ubuntu:16.04
 MAINTAINER kerolon
-CMD echo -e "\n## Group-Office repository\ndeb http://repos.groupoffice.eu/ sixtwo main" | tee -a /etc/apt/sources.list
+RUN echo -e "\n## Group-Office repository\ndeb http://repos.groupoffice.eu/ sixtwo main" | tee -a /etc/apt/sources.list
 RUN apt-get update
 RUN apt-get -y install php
 RUN apt-get -y install php-fpm
@@ -8,3 +8,10 @@ RUN apt-get -y install mysql-server
 RUN apt-get -y install nginx
 RUN apt-get -y install groupoffice-com
 RUN apt-get -y install libwbxml2-utils
+RUN mkdir /var/www/groupoffice
+RUN touch /var/www/groupoffice/config.php
+RUN chown www-data.www-data /var/www/groupoffice/config.php
+RUN chmod u+w /var/www/groupoffice/config.php
+RUN mkdir /var/www/groupoffice/local
+RUN chown www-data /var/www/groupoffice/local
+COPY ./php.conf /etc/nginx/conf.d/
