@@ -4,7 +4,6 @@ RUN echo -e "\n## Group-Office repository\ndeb http://repos.groupoffice.eu/ sixt
 RUN apt-get update && apt-get -y upgrade && apt-get -y install \
 php \
 php-fpm \
-mysql-server \
 nginx \
 groupoffice-com \
 libwbxml2-utils
